@@ -1,0 +1,80 @@
+<template data-controller-name="cardealer.controller.DetailsView">
+<div data-sap-ui-type="sap.m.Page" data-title="Car's details">
+	<div data-sap-ui-aggregation="content">
+		<div data-sap-ui-type="sap.ui.layout.form.SimpleForm">
+			<div data-sap-ui-aggregation="content">
+				<div data-sap-ui-type="sap.m.Label" data-text="VIN"></div>
+				<div data-sap-ui-type="sap.m.Input" data-value="{detailsModel>/vin}"
+					data-placeholder="VIN" data-editable="{editableModel>/isCreating}"
+					data-max-length="40"></div>
+
+				<div data-sap-ui-type="sap.m.Label" data-text="Brand"></div>
+				<div data-sap-ui-type="sap.m.Input"
+					data-value="{detailsModel>/brand}" data-placeholder="Brand"
+					data-editable="{editableModel>/editable}" data-max-length="40"></div>
+
+				<div data-sap-ui-type="sap.m.Label" data-text="Model"></div>
+				<div data-sap-ui-type="sap.m.Input"
+					data-value="{detailsModel>/model}" data-placeholder="Model"
+					data-editable="{editableModel>/editable}" data-max-length="40"></div>
+
+				<div data-sap-ui-type="sap.m.Label" data-text="Price"></div>
+				<div data-sap-ui-type="sap.m.Input"
+					data-value="{detailsModel>/price}" data-placeholder="Price"
+					data-editable="{editableModel>/editable}" data-max-length="15"></div>
+
+				<div data-sap-ui-type="sap.m.Label" data-text="Production Year"></div>
+				<div data-sap-ui-type="sap.m.Input"
+					data-value="{detailsModel>/productionYear}"
+					data-placeholder="Production Year"
+					data-editable="{editableModel>/editable}" data-max-length="4"></div>
+
+				<div data-sap-ui-type="sap.m.Label" data-text="Engine Capacity"></div>
+				<div data-sap-ui-type="sap.m.Input"
+					data-value="{detailsModel>/engineCap}"
+					data-placeholder="Engine Capacity"
+					data-editable="{editableModel>/editable}" data-max-length="4"></div>
+
+				<div data-sap-ui-type="sap.m.Label" data-text="Engine Type"></div>
+				<div data-sap-ui-type="sap.m.Input"
+					data-value="{detailsModel>/engineType}"
+					data-placeholder="Engine Type"
+					data-editable="{editableModel>/editable}" data-max-length="40"></div>
+
+				<div data-sap-ui-type="sap.m.Label" data-text="Color"></div>
+				<div data-sap-ui-type="sap.m.Input"
+					data-value="{detailsModel>/color}" data-placeholder="Color"
+					data-editable="{editableModel>/editable}" data-max-length="40"></div>
+			</div>
+
+		</div>
+	</div>
+	<div data-sap-ui-aggregation="footer">
+		<div data-sap-ui-type="sap.m.Bar">
+			<div data-sap-ui-aggregation="contentLeft">
+				<div data-sap-ui-type="sap.m.Button" data-text="Create new"
+					data-visible="{editableModel>/buttons/createNew}"
+					data-press="onCreateNewPress"></div>
+
+			</div>
+			<div data-sap-ui-aggregation="contentRight">
+				<div data-sap-ui-type="sap.m.Button" data-text="Delete"
+					data-visible="{editableModel>/buttons/delete}"
+					data-press="onDeletePress"></div>
+				<div data-sap-ui-type="sap.m.Button" data-text="Modify"
+					data-visible="{editableModel>/buttons/modify}"
+					data-press="onModifyPress"></div>
+				<div data-sap-ui-type="sap.m.Button" data-text="Save"
+					data-visible="{editableModel>/buttons/save}"
+					data-press="onSavePress"></div>
+				<div data-sap-ui-type="sap.m.Button" data-text="Create"
+					data-visible="{editableModel>/buttons/create}"
+					data-press="onCreatePress"></div>
+				<div data-sap-ui-type="sap.m.Button" data-text="Cancel"
+					data-visible="{editableModel>/buttons/cancel}"
+					data-press="onCancelPress"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</template>

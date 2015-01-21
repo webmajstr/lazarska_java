@@ -1,0 +1,23 @@
+<template data-controller-name="cardealer.controller.MasterView">
+<div data-sap-ui-type="sap.m.Page" data-title="Available cars">
+	<div data-sap-ui-aggregation="content">
+		<div data-sap-ui-type="sap.m.List" data-mode="SingleSelectMaster"
+			data-selection-change="onSelectionChange"
+			data-items="{masterModel>/}">
+			<div data-sap-ui-aggregation="items">
+				<div data-sap-ui-type="sap.m.ObjectListItem"
+					data-title="{masterModel>brand} {masterModel>model}"
+					data-number="{masterModel>price}" data-number-unit="EUR"
+					data-intro="{masterModel>productionYear}"
+					data-icon="sap-icon://car-rental"></div>
+
+			</div>
+		</div>
+	</div>
+	<div data-sap-ui-aggregation="footer">
+		<div data-sap-ui-type="sap.m.Bar">
+
+		</div>
+	</div>
+</div>
+</template>
