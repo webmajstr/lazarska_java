@@ -8,6 +8,7 @@ public class CarDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String vin;
     private String brand;
     private String model;
@@ -20,7 +21,8 @@ public class CarDTO {
     public CarDTO() {
     }
 
-    public CarDTO(String vin, String brand, String model, double price, int productionYear, double engineCap, String engineType, String color) {
+    public CarDTO(long id, String vin, String brand, String model, double price, int productionYear, double engineCap, String engineType, String color) {
+        this.id = id;
         this.vin = vin;
         this.brand = brand;
         this.model = model;
@@ -30,8 +32,14 @@ public class CarDTO {
         this.engineType = engineType;
         this.color = color;
     }
-    
-    
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getVin() {
         return vin;

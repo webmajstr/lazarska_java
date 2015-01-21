@@ -17,6 +17,7 @@ public class CarSimpleDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String vin;
     private String brand;
     private String model;
@@ -27,7 +28,8 @@ public class CarSimpleDTO {
     public CarSimpleDTO() {
     }
 
-    public CarSimpleDTO(String vin, String brand, String model, double price, int productionYear, String engineType) {
+    public CarSimpleDTO(long id, String vin, String brand, String model, double price, int productionYear, String engineType) {
+        this.id = id;
         this.vin = vin;
         this.brand = brand;
         this.model = model;
@@ -35,8 +37,15 @@ public class CarSimpleDTO {
         this.productionYear = productionYear;
         this.engineType = engineType;
     }
-    
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     public String getVin() {
         return vin;
     }
