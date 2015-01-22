@@ -11,6 +11,9 @@ sap.ui.controller("cardealer.controller.DetailsView", {
 	onInit : function() {
 
 		this.oView = this.getView();
+		this.oBus = sap.ui.getCore().getEventBus();
+		
+		this.oBus.subscribe("Details", "refreshDetails", jQuery.proxy(this.fetchData, this));
 
 		this.detailsModel = new sap.ui.model.json.JSONModel();
 		this.oView.setModel(this.detailsModel, "detailsModel");
@@ -20,20 +23,16 @@ sap.ui.controller("cardealer.controller.DetailsView", {
 		
 		this.setDefaultEditableModel();
 
-		this.setFakeData();
+		this.setClearData();
 
 	},
 
-	setFakeData : function() {
-		this.detailsModel.setData({
-			vin : "JDHHSKK6678",
-			brand : "Volkswagen",
-			model : "Passat",
-			price : 12000.00,
-			productionYear : 2009,
-			engineType : "Diesel",
-			engineCap : 2.2,
-			color : "Brown"
+	fetchData: function(channel, fn, data) {
+		var that = this;
+		$.get("/car/" + data.vin, function(data) {
+			that.detailsModel.setData(data);
+		}).fail(function() {
+			sap.m.MessageToast.show("Error while loading car details");
 		});
 	},
 	setClearData : function() {
@@ -64,35 +63,6 @@ sap.ui.controller("cardealer.controller.DetailsView", {
 		});
 	},
 
-/**
- * Similar to onAfterRendering, but this hook is invoked before the controller's
- * View is re-rendered (NOT before the first rendering! onInit() is used for
- * that one!).
- * 
- * @memberOf cardealer.view.DetailsView
- */
-// onBeforeRendering: function() {
-//
-// },
-/**
- * Called when the View has been rendered (so its HTML is part of the document).
- * Post-rendering manipulations of the HTML could be done here. This hook is the
- * same one that SAPUI5 controls get after being rendered.
- * 
- * @memberOf cardealer.view.DetailsView
- */
-// onAfterRendering: function() {
-//
-// },
-/**
- * Called when the Controller is destroyed. Use this one to free resources and
- * finalize activities.
- * 
- * @memberOf cardealer.view.DetailsView
- */
-// onExit: function() {
-//
-// }
 	onCreateNewPress: function() {
 		this.tempData = this.detailsModel.getData();
 		
@@ -113,8 +83,15 @@ sap.ui.controller("cardealer.controller.DetailsView", {
 		
 	},
 	onCreatePress: function() {
-		this.setDefaultEditableModel();
-
+		var that = this;
+		$.post("/car", JSON.stringify(that.detailsModel.getData()), function() {
+			that.oBus.publish("Master", "refresh");
+			sap.m.MessageToast.show("Succesfully created vehicle");
+			that.setDefaultEditableModel();
+		}).fail(function() {
+			sap.m.MessageToast.show("Error while creating car");
+		});
+		
 	},
 	onModifyPress: function() {
 		this.tempData = JSON.parse(JSON.stringify(this.detailsModel.getData()));
@@ -134,10 +111,43 @@ sap.ui.controller("cardealer.controller.DetailsView", {
 		
 	},
 	onDeletePress: function() {
-		this.setDefaultEditableModel();
+		
+		var that = this,
+		data = this.detailsModel.getData();
+		
+		$.ajax({
+		    url: "/car/" + data.vin,
+		    type: 'DELETE',
+		    success: function() {
+				that.oBus.publish("Master", "refresh");
+				sap.m.MessageToast.show("Succesfully deleted vehicle");
+				that.setDefaultEditableModel();
+			},
+			error: function() {
+				sap.m.MessageToast.show("Error while deleting a car");
+			}
+		  });
 	},
 	onSavePress: function() {
-		this.setDefaultEditableModel();
+		
+		var that = this,
+		data = this.detailsModel.getData();
+		
+		$.ajax({
+		    url: "/car/" + data.vin,
+		    type: 'PUT',
+		    success: function() {
+				that.oBus.publish("Master", "refresh");
+				sap.m.MessageToast.show("Succesfully updated vehicle");
+				that.setDefaultEditableModel();
+			},
+			error: function() {
+				sap.m.MessageToast.show("Error while updating car");
+			},
+		    data: JSON.stringify(data)
+		  });
+		
+		
 	},
 	onCancelPress: function() {
 		this.detailsModel.setData(this.tempData);

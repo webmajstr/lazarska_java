@@ -1,6 +1,8 @@
 <template data-controller-name="cardealer.controller.MasterView">
 <div data-sap-ui-type="sap.m.Page" data-title="Available cars">
 	<div data-sap-ui-aggregation="content">
+
+		<div data-sap-ui-type="sap.m.PullToRefresh" data-refresh="onRefresh" id="pullToRefresh"></div>
 		<div data-sap-ui-type="sap.m.List" data-mode="SingleSelectMaster"
 			data-selection-change="onSelectionChange"
 			data-items="{masterModel>/}">
@@ -10,14 +12,15 @@
 					data-number="{masterModel>price}" data-number-unit="EUR"
 					data-intro="{masterModel>productionYear}"
 					data-icon="sap-icon://car-rental"></div>
-
+<!-- 				<div data-sap-ui-aggregation="customData"> -->
+<!-- 					<div data-sap-ui-type="sap.ui.core.CustomData" data-key="vin" -->
+<!-- 						data-value="{masterModel>vin}"></div> -->
+<!-- 				</div> -->
 			</div>
 		</div>
 	</div>
-	<div data-sap-ui-aggregation="footer">
-		<div data-sap-ui-type="sap.m.Bar">
-
-		</div>
-	</div>
+</div>
+<div data-sap-ui-aggregation="footer">
+	<div data-sap-ui-type="sap.m.Bar"></div>
 </div>
 </template>

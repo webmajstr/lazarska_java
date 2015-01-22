@@ -14,6 +14,10 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script>
 				sap.ui.localResources("cardealer");
+				
+				$.ajaxSetup({
+					contentType: "application/json"
+					});
 				var app = new sap.m.SplitApp({detailPages: [
 					sap.ui.view({viewName:"cardealer.view.DetailsView", 
 						type:sap.ui.core.mvc.ViewType.HTML})
