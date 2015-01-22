@@ -7,22 +7,19 @@ import java.util.List;
 public class CarDTO {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
     private String vin;
     private String brand;
     private String model;
     private double price;
     private int productionYear;
     private double engineCap;
-    private String engineType;
+    private String engineType; //Diesel, Petrol, Gas
     private String color;
 
     public CarDTO() {
     }
 
-    public CarDTO(long id, String vin, String brand, String model, double price, int productionYear, double engineCap, String engineType, String color) {
-        this.id = id;
+    public CarDTO(String vin, String brand, String model, double price, int productionYear, double engineCap, String engineType, String color) {
         this.vin = vin;
         this.brand = brand;
         this.model = model;
@@ -31,14 +28,6 @@ public class CarDTO {
         this.engineCap = engineCap;
         this.engineType = engineType;
         this.color = color;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getVin() {

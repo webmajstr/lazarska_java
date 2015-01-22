@@ -5,19 +5,12 @@
  */
 package pl.edu.amu.carDealer.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 /**
  *
  * @author Ozga
  */
 public class CarSimpleDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
     private String vin;
     private String brand;
     private String model;
@@ -28,8 +21,12 @@ public class CarSimpleDTO {
     public CarSimpleDTO() {
     }
 
-    public CarSimpleDTO(long id, String vin, String brand, String model, double price, int productionYear, String engineType) {
-        this.id = id;
+    public CarSimpleDTO(String vin) {
+        this.vin = vin;
+    }
+
+    
+    public CarSimpleDTO(String vin, String brand, String model, double price, int productionYear, String engineType) {
         this.vin = vin;
         this.brand = brand;
         this.model = model;
@@ -38,14 +35,6 @@ public class CarSimpleDTO {
         this.engineType = engineType;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-    
     public String getVin() {
         return vin;
     }

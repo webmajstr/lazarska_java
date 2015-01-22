@@ -27,10 +27,9 @@ public class CarDealerResource {
     private CarRepository cars;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<CarSimpleDTO> getBooksList() {
+    public Iterable<CarSimpleDTO> getCarsList() {
 
-        return null;
-      //  return cars.findAll();
+      return cars.findAllSimple();
     }
 
     @RequestMapping(value = "/{vin}", method = RequestMethod.GET)
